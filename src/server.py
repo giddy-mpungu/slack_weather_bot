@@ -1,5 +1,6 @@
 import http.server
 import json
+from weather import fetch_weather
 
 class SlackRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_POST(self):
@@ -16,13 +17,22 @@ class SlackRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_error(400, 'Missing city parameter')
             return    
 
-        # Process city parameter (to be implemented)
+        # Fetch weather data for the specified city
+        temperature = fetch_weather(city)
+
+        if temperature is None:
+            # Handle error fetching weather data
+            self.send_error(500, 'Error fetching weather data')
+            return
+
+        # Format response message with weather information
+        response_message = f"The current temperature in {city} is {temperature:.2f}°C."
 
         # Send response
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        response_data = {'text': f"Received request for weather in {city}"}
+        response_data = {'text': response_message}
         self.wfile.write(json.dumps(response_data).encode('utf-8'))
 
 def run_server():
