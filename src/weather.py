@@ -1,7 +1,13 @@
 import requests
+import os
+from dotenv import load_dotenv
+import traceback
+
+# Load environment variables from .env file
+load_dotenv()
 
 def fetch_weather(city):
-    api_key = ''  # OpenWeather API key
+    api_key = os.environ.get('OPENWEATHERMAP_API_KEY')  # OpenWeather API key
     
     # Construct the API request URL with only the city name
     url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&APPID={api_key}'
@@ -24,4 +30,5 @@ def fetch_weather(city):
         
     except requests.exceptions.RequestException as e:
         print(f'Error fetching weather data: {e}')
+        traceback.print_exc()
         return None
