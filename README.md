@@ -72,7 +72,7 @@ Before using the Weather Slack Bot, make sure you have the following:
 1. **Inspecting Slack API Responses:**
    - To understand how Slack sends requests to our bot, we added print statements in `slack.py` to inspect the raw data received from the Slack API.
    - This allowed us to identify that Slack sends the request data in URL format, which influenced how we processed and formatted the input from the Slack slash command.
-![Slack API Test](docs/slack_command_setup.png)
+![Slack API Test](docs/test+slack_api.png)
 
 
 2. **Formatting Slack Slash Command Input:**
