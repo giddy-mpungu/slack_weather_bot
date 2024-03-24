@@ -26,21 +26,21 @@ Before using the Weather Slack Bot, make sure you have the following:
 2. Add a new slash command (e.g., `/jumo_weather`) and configure it to point to the Ngrok URL (will be obtained in the next step) where the bot server is running.
 3. Install the Slack app to your workspace.
 4. Now you can use the slash command to query weather information from the bot.
-![Slack Command Setup](/slack_weather_bot/docs/slack_command_setup.png)
+![Slack Command Setup](docs/slack_command_setup.png)
 
 ### Ngrok Setup
 
 1. Download and install Ngrok from [https://ngrok.com/](https://ngrok.com/).
 2. Run Ngrok with the command `ngrok http 8000` (assuming your bot server is running on port 8000).
-![Ngrok Setup](/slack_weather_bot/docs/ngrok_setup.png)
+![Ngrok Setup](docs/ngrok_setup.png)
 3. Ngrok will provide you with a public URL that you can use to expose your local server to the internet.
 4. Use this Ngrok URL to configure webhook endpoints in your Slack app.
-![Ngrok Started](/slack_weather_bot/docs/ngrok_started.png)
+![Ngrok Started](docs/ngrok_started.png)
 
 ### OpenWeatherMap API
 1. Obtain an API key from [OpenWeather](https://openweathermap.org/) by signing up for a free account.
 2. You're sent an email with API key and instruction but you can also find this under "API keys" in your account.
-![Open Weather Map Setup](/slack_weather_bot/docs/openweathermap_api_setup.png)
+![Open Weather Map Setup](docs/openweathermap_api_setup.png)
 
 ## Usage
 
@@ -62,7 +62,7 @@ Before using the Weather Slack Bot, make sure you have the following:
 1. **Exploring OpenWeather API with Postman:**
    - We began by using Postman to directly hit the OpenWeather API and understand the structure of the responses it provides.
    - This helped us determine the necessary parameters and format for making requests to fetch weather data.
-![Open Weather Map API Test](/slack_weather_bot/docs/test_openweathermap_api.png)
+![Open Weather Map API Test](docs/test_openweathermap_api.png)
 
 2. **Building the `fetch_weather` Function:**
    - Based on our observations from testing the OpenWeather API, we developed the `fetch_weather` function in `weather.py` to handle requests and parse responses effectively.
@@ -72,7 +72,7 @@ Before using the Weather Slack Bot, make sure you have the following:
 1. **Inspecting Slack API Responses:**
    - To understand how Slack sends requests to our bot, we added print statements in `slack.py` to inspect the raw data received from the Slack API.
    - This allowed us to identify that Slack sends the request data in URL format, which influenced how we processed and formatted the input from the Slack slash command.
-![Slack API Test](/slack_weather_bot/docs/slack_command_setup.png)
+![Slack API Test](docs/slack_command_setup.png)
 
 
 2. **Formatting Slack Slash Command Input:**
