@@ -40,6 +40,7 @@ Before using the Weather Slack Bot, make sure you have the following:
 ### OpenWeatherMap API
 1. Obtain an API key from [OpenWeather](https://openweathermap.org/) by signing up for a free account.
 2. You're sent an email with API key and instruction but you can also find this under "API keys" in your account.
+3. For further documentation on how to use the geo API and how to specify the specific temperature metric (Celsius/Metric) for our case, you can find the documentation at [OpenWeather API](https://openweathermap.org/api/geocoding-api)
 ![Open Weather Map Setup](docs/openweathermap_api_setup.png)
 
 ## Usage
