@@ -28,6 +28,16 @@ def fetch_weather(city):
             print(f'Error: Temperature data not found in response for {city}')
             return None
         
+    except requests.exceptions.HTTPError as http_error:
+        if http_error.response.status_code == 404:
+            # City not found in the API response
+            print(f'City not found: {city}')
+            return 'city not found'
+        else:
+            # Other HTTP errors
+            print(f'HTTP error: {http_error}')
+            return None
+        
     except requests.exceptions.RequestException as e:
         print(f'Error fetching weather data: {e}')
         traceback.print_exc()
