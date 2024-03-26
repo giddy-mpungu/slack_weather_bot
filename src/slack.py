@@ -21,15 +21,15 @@ class SlackRequestHandler(BaseHTTPRequestHandler):
             return
 
         # Get parsed data
-        parsed_data = self.process_request(request_body)
+        parsed_data = urllib.parse.parse_qs(request_body)
 
         # Get city 
-        city = self.get_city(parsed_data)
+        city = parsed_data.get('text', [''])[0]
 
         # Get temperature and handle errors
         temperature = None
         if city:
-            temperature = self.get_temperature(city)
+            temperature = fetch_weather(city)
 
         # Send response to Slack
         self.send_slack_response(parsed_data, city, temperature)
@@ -46,15 +46,6 @@ class SlackRequestHandler(BaseHTTPRequestHandler):
         computed_signature = 'v0=' + hmac.new(slack_signing_secret.encode(), sig_basestring.encode(), hashlib.sha256).hexdigest()
         slack_signature = self.headers['X-Slack-Signature']
         return hmac.compare_digest(computed_signature, slack_signature)
-
-    def process_request(self, request_body):
-        return urllib.parse.parse_qs(request_body)
-
-    def get_city(self, parsed_data):
-        return parsed_data.get('text', [''])[0]
-
-    def get_temperature(self, city):
-        return fetch_weather(city)
 
     def send_slack_response(self, parsed_data, city, temperature):
         try:
